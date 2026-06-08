@@ -13,3 +13,4 @@ zone_name = "jaryai.com"
 [assets]
 directory = "./dist"
 binding = "ASSETS"
+
