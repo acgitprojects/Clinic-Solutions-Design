@@ -3,9 +3,18 @@ import { CATALOG } from "./catalog";
 export const fmt = (n) => "HK$" + Math.round(n).toLocaleString("en-US");
 
 export const BRAND_DOT = {
-  Fujifilm: "#E60012",
-  Dell: "#5f6a72",
-  Eizo: "#41484F",
+  Fujifilm:  "#E60012",
+  Dell:      "#5f6a72",
+  Eizo:      "#41484F",
+  Crestron:  "#004A80",
+  Zebra:     "#5f6a72",
+  Honeywell: "#E2231A",
+  Hikvision: "#CE0037",
+  Synology:  "#B5121B",
+  Fortinet:  "#EE3124",
+  APC:       "#003F72",
+  "TP-Link": "#4DBBEB",
+  Logitech:  "#00B8FC",
 };
 
 export function roomUnit(room, items) {

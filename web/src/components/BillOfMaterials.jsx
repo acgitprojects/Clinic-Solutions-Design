@@ -1,8 +1,26 @@
 import { CATALOG } from "../catalog";
 import { fmt, computeTotals } from "../utils";
 
+function collectPrereqs(branches, items) {
+  const seen = new Set();
+  const result = [];
+  branches.forEach((b) => {
+    CATALOG.rooms.forEach((room) => {
+      if (!b.config[room.id]) return;
+      room.lines.forEach((line) => {
+        const it = items[line.item];
+        (it.prereqs || []).forEach((p) => {
+          if (!seen.has(p)) { seen.add(p); result.push({ prereq: p, item: it.name }); }
+        });
+      });
+    });
+  });
+  return result;
+}
+
 export default function BillOfMaterials({ branches, meta, portfolio, items, rates, onClose }) {
   items = items || CATALOG.items;
+  const prereqs = collectPrereqs(branches, items);
 
   const branchData = branches.map((b) => {
     const totals = computeTotals(b.config, items, rates);
@@ -152,6 +170,29 @@ export default function BillOfMaterials({ branches, meta, portfolio, items, rate
             </div>
           </div>
         ))}
+
+        {prereqs.length > 0 && (
+          <div className="bom-prereqs">
+            <div className="bom-prereqs-title">Pre-requisites &amp; Site Requirements</div>
+            <p className="bom-prereqs-intro">
+              The following infrastructure, power, and third-party services must be in place or procured separately
+              before equipment installation can commence. Items marked ⚠ require special attention.
+            </p>
+            <table className="bom-prereqs-table">
+              <thead>
+                <tr><th>Requirement</th><th>Required by</th></tr>
+              </thead>
+              <tbody>
+                {prereqs.map((p, i) => (
+                  <tr key={i} className={p.prereq.startsWith("⚠") ? "prereq-warn" : ""}>
+                    <td>{p.prereq}</td>
+                    <td className="dim">{p.item}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
 
         <div className="bom-disclaimer">
           Figures are indicative budgetary estimates in Hong Kong Dollars (HKD) and exclude statutory taxes,
