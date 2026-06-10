@@ -49,6 +49,10 @@ export const CATALOG = {
                    prereqs: ["PoE+ switch port (IEEE 802.3at, 25.5W minimum) — or optional 24VDC 1.25A power adapter", "HDMI display connected to AM-3200 HDMI output port", "Gigabit Ethernet connection to clinic LAN", "Presenting devices need Crestron AirMedia Connect app — Windows / macOS / iOS / Android (free download)", "Guest isolation: separate guest SSID or VLAN recommended for visitor presenters"] },
     dmNvx:       { name: "Crestron DM-NVX-350 AV-over-IP",         brand: "Crestron",  note: "4K60 AV-over-IP encoder/decoder, Gigabit, PoE++, per unit price",   material: 20000, install: 1800, unit: "ea",
                    prereqs: ["PoE++ / UPOE switch port (60W per unit) — standard PoE (15W) or PoE+ (25W) are insufficient", "Gigabit Ethernet network; minimum 350 Mbps dedicated bandwidth per active 4K stream", "Dedicated AV VLAN strongly recommended to isolate high-bandwidth video from clinical data traffic", "HDMI source at encoder end; HDMI display at decoder end for each video path", "Sold and deployed in encoder + decoder pairs — minimum 2 units per video route", "DM NVX Director management software (free, requires Windows Server — already included if Dell PowerEdge server is provisioned)"] },
+    dmNvx360:    { name: "Crestron DM-NVX-360 AV-over-IP",         brand: "Crestron",  note: "4K60 4:4:4 HDR network AV encoder/decoder, PoE+, AES67, USB/KVM routing", material: 12950, install: 1800, unit: "ea",
+                   prereqs: ["PoE+ switch port (IEEE 802.3at, 25.5W per unit) — compatible with standard PoE+ switches", "Gigabit Ethernet; minimum 350 Mbps dedicated bandwidth per active 4K60 stream", "Non-blocking network switches — no oversubscribed uplinks on the AV path", "Dedicated AV VLAN recommended to segregate video / audio / USB traffic from clinical data", "HDMI source at encoder end; HDMI display at decoder end (18 Gbps-rated HDMI cables for 4K60 4:4:4 HDR)", "Deployed in encoder + decoder pairs — minimum 2 units per video route", "USB note: when PoE+ powered, USB ports limited to 500mA combined", "DM NVX Director software for fleet management (free; Windows Server — covered by Dell PowerEdge if provisioned)"] },
+    sdiConverter:{ name: "ATEN VC486 12G-SDI to HDMI Converter",   brand: "ATEN",      note: "Converts 12G/6G/3G/HD-SDI medical imaging feeds to HDMI 2.0, 4K60, SDI loop-out", material: 11500, install: 800, unit: "ea",
+                   prereqs: ["SDI source device (ultrasound, endoscopy or PTZ camera) with BNC output", "75Ω SDI coax cable — max run 45m @ 12G-SDI / 90m @ 3G-SDI / 150m @ HD-SDI", "HDMI display or downstream device (e.g. DM-NVX encoder) at output", "220V power outlet for included 5V power adapter", "Audio: stereo RCA output if de-embedded SDI audio is required"] },
   },
 
   rooms: [
@@ -127,11 +131,12 @@ export const CATALOG = {
     },
     {
       id: "telemedicine", name: "Telemedicine Hub", zone: "Clinical",
-      blurb: "Crestron AV-over-IP for remote consultation, surgical video streaming and multi-room imaging distribution.",
+      blurb: "Crestron AV-over-IP with SDI medical imaging bridge for remote consultation, surgical video streaming and multi-room distribution.",
       count: 0,
       lines: [
-        { item: "dmNvx",   qty: 2 },
-        { item: "hdTxc4kz", qty: 2 },
+        { item: "dmNvx360",     qty: 2 },
+        { item: "sdiConverter", qty: 1 },
+        { item: "hdTxc4kz",     qty: 2 },
       ],
     },
   ],

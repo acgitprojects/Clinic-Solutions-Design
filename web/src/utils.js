@@ -7,6 +7,7 @@ export const BRAND_DOT = {
   Dell:      "#5f6a72",
   Eizo:      "#41484F",
   Crestron:  "#004A80",
+  ATEN:      "#6f2c91",
   Zebra:     "#5f6a72",
   Honeywell: "#E2231A",
   Hikvision: "#CE0037",
